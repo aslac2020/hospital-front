@@ -1,0 +1,100 @@
+<div class="container-fluid">
+  <div class="row flex-nowrap">
+      <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0" style="background-color: #004a9f;">
+        <app-sidenav></app-sidenav>
+      </div>
+      <div class="col py-3">
+        <mat-card class=".example-card">
+          <mat-card-title style="background-color: #004a9f; color: white;">Consultas</mat-card-title>
+
+          <!--Tabela de Consultas-->
+          <mat-form-field style="margin-top:20px">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+          </mat-form-field>
+
+          <button mat-flat-button color="primary">Cadastrar Consulta</button>
+
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <!-- Name Patient Column -->
+            <ng-container matColumnDef="namePatient">
+              <th mat-header-cell *matHeaderCellDef> Paciente </th>
+              <td mat-cell *matCellDef="let consults"> {{consults.patient.name + " " +  consults.patient.lastName }} </td>
+            </ng-container>
+
+            <!-- Name Medic Column -->
+            <ng-container matColumnDef="nameDoctor">
+              <th mat-header-cell *matHeaderCellDef> Médico </th>
+              <td mat-cell *matCellDef="let consults"> {{consults.doctor.name}} </td>
+            </ng-container>
+
+            <!-- Specialities Column -->
+            <ng-container matColumnDef="specialities">
+              <th mat-header-cell *matHeaderCellDef> Especialidade </th>
+              <td mat-cell *matCellDef="let consults"> {{consults.doctor.specialties}} </td>
+            </ng-container>
+
+            <!-- Room Column -->
+            <ng-container matColumnDef="room">
+              <th mat-header-cell *matHeaderCellDef> Sala </th>
+              <td mat-cell *matCellDef="let consults"> {{consults.room.numberRoom}} </td>
+            </ng-container>
+
+            <!-- Status Column -->
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef> Status da Consulta </th>
+              <td [ngStyle]="{'color': getColor(consults.status)}" mat-cell id="lineStatus" *matCellDef="let consults">
+                {{consults.status}} </td>
+            </ng-container>
+
+            <!-- data Column -->
+            <ng-container matColumnDef="dataConsult">
+              <th mat-header-cell *matHeaderCellDef> Data da Consulta </th>
+              <td mat-cell *matCellDef="let consults"> {{consults.dateConsult | date: "dd/MM/yyyy" }} </td>
+            </ng-container>
+
+
+            <!-- data Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> Ações </th>
+              <td mat-cell *matCellDef="let consults">
+                <button
+                color="primary"
+                mat-mini-fab
+                aria-label="Visualizar"
+                >
+                <mat-icon hint="Visualizar consulta">list_alt</mat-icon>
+              </button>
+              <button
+              style=" background-color: gray"
+                mat-mini-fab
+                aria-label="Editar"
+                >
+                <mat-icon hint="Editar consulta">create</mat-icon>
+              </button>
+              <button
+                style=" background-color: orangered"
+                mat-mini-fab
+                aria-label="Deletar"
+                >
+                <mat-icon hint="Deletar consulta">delete</mat-icon>
+              </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+          </table>
+
+        </mat-card>
+      </div>
+  </div>
+</div>
+
+
