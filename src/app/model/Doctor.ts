@@ -1,5 +1,5 @@
 export class Doctor {
-  id?: number;
+  id!: number;
   name!: string;
   crm!: string;
   specialties!: string;

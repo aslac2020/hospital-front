@@ -1,24 +1,36 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {MatCardModule} from '@angular/material/card';
+
+
+import { AppRoutingModule } from './app-routing.module'
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './screens/home/home.component';
+import { PatientsComponent } from './screens/patients/patients.component';
+import { SidenavComponent } from './screens/sidenav/sidenav.component';
+import { CreateConsultsComponent } from './screens/consults/create-consults/create-consults.component';
+
+
+import {MatCardModule} from '@angular/material/card';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import { HttpClientModule } from '@angular/common/http';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import { SidenavComponent } from './screens/sidenav/sidenav.component';
 import {MatDividerModule} from '@angular/material/divider';
-import { PatientsComponent } from './screens/patients/patients.component';
 import {MatButtonModule} from '@angular/material/button';
-import { CreateConsultsComponent } from './screens/consults/create-consults/create-consults.component';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { EditConsultsComponent } from './screens/consults/edit-consults/edit-consults.component';
+
 
 
 @NgModule({
@@ -29,6 +41,7 @@ import { CreateConsultsComponent } from './screens/consults/create-consults/crea
     SidenavComponent,
     PatientsComponent,
     CreateConsultsComponent,
+    EditConsultsComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +56,12 @@ import { CreateConsultsComponent } from './screens/consults/create-consults/crea
     HttpClientModule,
     MatSidenavModule,
     MatDividerModule,
-    MatButtonModule
+    MatButtonModule,
+    MatStepperModule,
+    MatRadioModule,
+    MatSelectModule,
+    AppRoutingModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

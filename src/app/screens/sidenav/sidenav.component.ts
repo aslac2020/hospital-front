@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidenav',
@@ -7,4 +8,14 @@ import { Component } from '@angular/core';
 })
 export class SidenavComponent {
   showFiller = false;
+
+  constructor(private router: Router,){
+
+  }
+
+  navigateHome(){
+    this.router.navigate([''])
+  }
+
+
 }

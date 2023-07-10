@@ -13,7 +13,7 @@
             <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
           </mat-form-field>
 
-          <button mat-flat-button color="primary">Cadastrar Consulta</button>
+          <button (click)="nextPageConsult()" mat-flat-button color="primary">Cadastrar Consulta</button>
 
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -51,7 +51,7 @@
             <!-- data Column -->
             <ng-container matColumnDef="dataConsult">
               <th mat-header-cell *matHeaderCellDef> Data da Consulta </th>
-              <td mat-cell *matCellDef="let consults"> {{consults.dateConsult | date: "dd/MM/yyyy" }} </td>
+              <td mat-cell *matCellDef="let consults"> {{consults.dateConsult | date: "dd/MM/yyyy HH:mm:ss" }} </td>
             </ng-container>
 
 

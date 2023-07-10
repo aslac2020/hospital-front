@@ -4,10 +4,11 @@
       <app-sidenav></app-sidenav>
     </div>
     <div class="col py-3">
+
       <mat-horizontal-stepper linear (selectionChange)="selectionChangeSteps($event)" #stepper>
         <!-- Forms Patients-->
         <mat-step label="Step 1" errorMessage="Name is required.">
-          <form [formGroup]="formPatients">
+          <form [formGroup]="formEditPatient">
             <div class="row" style="width:100%">
               <ng-template matStepLabel>Cadastro de Paciente</ng-template>
               <mat-form-field appearance="outline">
@@ -33,7 +34,7 @@
                 <mat-radio-button value="false">Não</mat-radio-button>
               </mat-radio-group>
               <div>
-                <button [disabled]="formPatients.invalid" mat-raised-button matStepperNext color="primary">Next</button>
+                <button [disabled]="formEditPatient.invalid" mat-raised-button matStepperNext color="primary">Next</button>
               </div>
             </div>
           </form>
@@ -41,7 +42,7 @@
 
         <!-- Forms Doctor-->
         <mat-step label="Step 2">
-          <form [formGroup]="formDoctors">
+          <form [formGroup]="formEditDoctor">
             <div class="row" style="width:100%">
               <mat-form-field appearance="outline">
                 <mat-label>Selecione a especialidade</mat-label>
@@ -66,7 +67,7 @@
               </mat-form-field>
               <div>
                 <button style="margin:10px" mat-raised-button matStepperPrevious color="accent">Back</button>
-                <button [disabled]="formDoctors.invalid" mat-raised-button matStepperNext color="primary">Next</button>
+                <button [disabled]="formEditDoctor.invalid" mat-raised-button matStepperNext color="primary">Next</button>
               </div>
             </div>
           </form>
@@ -75,7 +76,7 @@
         <!-- Forms Room-->
         <mat-step label="Step 3">
           <ng-template matStepLabel>Consultório</ng-template>
-          <form [formGroup]="formRooms">
+          <form [formGroup]="formEditRoom">
             <div class="row" style="width:100%">
               <mat-form-field appearance="outline">
                 <mat-label>Selecione a Sala</mat-label>
@@ -87,13 +88,13 @@
               </mat-form-field>
               <div>
                 <button style="margin:10px" mat-raised-button matStepperPrevious color="accent">Back</button>
-                <button [disabled]="formRooms.invalid" mat-raised-button (click)="createConsult()" color="primary">Salvar</button>
+                <button [disabled]="formEditRoom.invalid" mat-raised-button (click)="updateConsult()" color="primary">Salvar</button>
               </div>
             </div>
           </form>
         </mat-step>
-
       </mat-horizontal-stepper>
     </div>
+
   </div>
 </div>

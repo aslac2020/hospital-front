@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { ConsultStatus } from 'src/app/model/ConsultStatus';
 import { Consultant } from 'src/app/model/Consultant';
 import { HospitalService } from 'src/app/services/hospital.service';
@@ -16,9 +18,13 @@ export class HomeComponent {
   dataSource = new MatTableDataSource<Consultant>;
   frmConsultant!: FormGroup;
   status!: String;
+
+  @ViewChild(MatSort) sort!: MatSort;
+
   constructor(
     private formBuilder: FormBuilder,
-    private hospitalApi: HospitalService
+    private hospitalApi: HospitalService,
+    private router: Router
 
   ) { }
 
@@ -42,15 +48,16 @@ export class HomeComponent {
       .subscribe(
         {
           next: (data: Consultant[] | any) => {
-            let result = this.consults = data;
+            this.consults = data;
             this.statusConsult(data);
-            this.dataSource = new MatTableDataSource(result);
+            this.dataSource = new MatTableDataSource(this.consults);
           }
         }
       )
   }
 
   statusConsult(data: Consultant[]) {
+    console.log(data)
     const result = data.forEach(dataResult => {
       if(dataResult.isPatientToken == true) {
         dataResult.status = ConsultStatus.FazendoFicha
@@ -77,6 +84,10 @@ export class HomeComponent {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  nextPageConsult(){
+    this.router.navigate(['/consulta'])
   }
 
 

@@ -3,14 +3,13 @@ import { Doctor } from './Doctor';
 import { Patient } from './Patient';
 import { Room } from './Room';
 export class Consultant {
-  id!: number;
-  dateConsult!: Date;
+  id?: number;
   isPatientToken!: boolean;
   isPatientRoomSorting!: boolean;
   isPatientRoomClinic!: boolean;
   isPatientRoomMedication!: boolean;
   doctor!: Doctor;
-  rooms!: Room;
+  room!: Room;
   patient!: Patient;
   status!: ConsultStatus;
 
