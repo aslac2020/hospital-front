@@ -67,7 +67,8 @@
                 <mat-icon hint="Visualizar consulta">list_alt</mat-icon>
               </button>
               <button
-              style=" background-color: gray"
+                (click)="updateConsult(consults.id)"
+                style=" background-color: gray"
                 mat-mini-fab
                 aria-label="Editar"
                 >

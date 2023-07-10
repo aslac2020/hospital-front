@@ -38,4 +38,12 @@ export class HospitalService {
     return this.http.get<Doctor>(`${API_URL}/medicos/crm/${crm}`);
   }
 
+  getDoctorByName(name: string): Observable<Doctor[]>{
+    return this.http.get<Doctor[]>(`${API_URL}/medicos/name/${name}`);
+  }
+
+  getConsultsById(id: number): Observable<Consultant>{
+    return this.http.get<Consultant>(`${API_URL}/consultas/${id}`)
+  }
+
 }

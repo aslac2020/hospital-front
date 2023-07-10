@@ -90,5 +90,9 @@ export class HomeComponent {
     this.router.navigate(['/consulta'])
   }
 
+  updateConsult(id: number | any) {
+    this.router.navigate(['/consulta/', id]);
+  }
+
 
 }

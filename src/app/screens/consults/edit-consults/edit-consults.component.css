@@ -1,0 +1,7 @@
+.mat-mdc-form-field {
+  margin-top: 16px;
+}
+
+.mat-mdc-radio-button ~ .mat-mdc-radio-button {
+  margin-left: 16px;
+}
