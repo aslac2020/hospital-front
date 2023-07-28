@@ -1,0 +1,88 @@
+<div class="container-fluid">
+  <div class="row flex-nowrap">
+    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0" style="background-color: #004a9f;">
+      <app-sidenav></app-sidenav>
+    </div>
+    <div class="col py-3">
+      <mat-horizontal-stepper style="margin-top:10px" linear  #stepper>
+        <!-- Forms Patients-->
+        <mat-step label="Step 1" errorMessage="Name is required.">
+          <form [formGroup]="formViewPatient">
+            <div class="row" style="width:100%">
+              <ng-template matStepLabel>Paciente</ng-template>
+              <mat-form-field appearance="outline">
+                <mat-label>Nome</mat-label>
+                <input matInput placeholder="Digite seu nome" formControlName="name" readonly="true">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Sobrenome</mat-label>
+                <input matInput placeholder="Digite seu sobrenome" formControlName="lastName" >
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Idade</mat-label>
+                <input type="number" matInput placeholder="Digite sua idade" formControlName="age" maxlength="2">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Cpf</mat-label>
+                <input matInput placeholder="Digite seu cpf" maxlength="14" formControlName="cpf" >
+              </mat-form-field>
+              <mat-radio-group  aria-label="Select an option"
+                 name="rdbutton">
+                <span style="color:gray">Paciente Preferêncial:</span>
+                <mat-radio-button [checked]="radioValue" [disabled]="true"  name="rdbPrefential" value="true">Sim</mat-radio-button>
+                <mat-radio-button [checked]="!radioValue" [disabled]="true"  name="rdbPrefential" value="false">Não</mat-radio-button>
+              </mat-radio-group>
+              <div>
+                <button [disabled]="formViewPatient.invalid" mat-raised-button matStepperNext color="primary">Next</button>
+              </div>
+            </div>
+          </form>
+        </mat-step>
+
+        <!-- Forms Doctor-->
+        <mat-step label="Step 2">
+          <form [formGroup]="formViewDoctor">
+            <div class="row" style="width:100%">
+              <mat-form-field appearance="outline">
+                <mat-label>Nome do Medico</mat-label>
+                <input id="crmInput" matInput placeholder="Nome do Médico" formControlName="name" readonly="true">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                <mat-label>Especialidade</mat-label>
+                <input  matInput placeholder="Especialidade" formControlName="crm" readonly="true">
+              </mat-form-field>
+              <ng-template matStepLabel>Médico</ng-template>
+              <mat-form-field appearance="outline">
+                <mat-label>Crm</mat-label>
+                <input  matInput placeholder="Crm do Médico" formControlName="crm" readonly="true">
+              </mat-form-field>
+              <div>
+                <button style="margin:10px" mat-raised-button matStepperPrevious color="accent">Back</button>
+                <button [disabled]="formViewDoctor.invalid" mat-raised-button matStepperNext color="primary">Next</button>
+              </div>
+            </div>
+          </form>
+        </mat-step>
+
+        <!-- Forms Room-->
+        <mat-step label="Step 3">
+          <ng-template matStepLabel>Consultório</ng-template>
+          <form [formGroup]="formViewRoom">
+            <div class="row" style="width:100%">
+              <mat-form-field appearance="outline">
+                <mat-label>Sala</mat-label>
+                <input  matInput placeholder="Consultório" formControlName="numberRoom" readonly="true">
+              </mat-form-field>
+              <div>
+                <button style="margin:10px" mat-raised-button matStepperPrevious color="accent">Back</button>
+                <button [disabled]="formViewRoom.invalid" mat-raised-button (click)="backHome()"  color="primary">Sair</button>
+              </div>
+            </div>
+          </form>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </div>
+
+  </div>
+</div>
+

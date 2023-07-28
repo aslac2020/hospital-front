@@ -1,11 +1,14 @@
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Consultant } from 'src/app/model/Consultant';
 import { Doctor } from 'src/app/model/Doctor';
 import { Patient } from 'src/app/model/Patient';
 import { Room } from 'src/app/model/Room';
+import { AlertDialogService } from 'src/app/services/alert-dialog.service';
 import { HospitalService } from 'src/app/services/hospital.service';
+import { LocalDate } from '@js-joda/core';
 
 @Component({
   selector: 'app-edit-consults',
@@ -16,7 +19,7 @@ export class EditConsultsComponent {
   formEditPatient!: FormGroup;
   formEditDoctor!: FormGroup;
   formEditRoom!: FormGroup;
-  idConsult: number = 0;
+  idConsult!: number;
   selectValueIsPreferential!: boolean;
   selectedValue!: string;
   doctors: Doctor[] = [];
@@ -25,8 +28,8 @@ export class EditConsultsComponent {
   numberRoom!: number;
   nameDoctor!: string;
   specialties!: string;
-  crm!:string;
-  doctorModel!: Doctor ;
+  crm!: string;
+  doctorModel!: Doctor;
   idPatient!: number;
   idDoctor!: number;
   idRoom!: number;
@@ -35,20 +38,26 @@ export class EditConsultsComponent {
   selectValueSpecialtiesDoctor!: string;
   selectValueNameDoctor!: string;
   selectValueRoom!: number;
+  idDoctorUpdate!: number;
+  datas: LocalDate[] = [] ;
 
   constructor(
     private _formBuilder: FormBuilder,
     private service: HospitalService,
-    private activatedRoute: ActivatedRoute){
+    private activatedRoute: ActivatedRoute,
+    private alertService: AlertDialogService,
+    private snackBar: MatSnackBar,
+    private router: Router
+  ) {
     this.createFormIsBlankDoctors();
     this.createFormIsBlankPatient();
     this.createFormIsBlankRooms();
   }
 
-  ngOnInit() {
-   const IdConsult = this.idConsult = this.activatedRoute.snapshot.params['id'];
-    this.getConsultsById(IdConsult);
 
+  ngOnInit() {
+    const IdConsult = this.idConsult = this.activatedRoute.snapshot.params['id'];
+    this.getConsultsById(IdConsult);
   }
 
   createFormIsBlankPatient() {
@@ -78,7 +87,7 @@ export class EditConsultsComponent {
     })
   }
 
-  radioChange(event: Event | any){
+  radioChange(event: Event | any) {
     this.selectValueIsPreferential = event.value;
   }
 
@@ -96,7 +105,6 @@ export class EditConsultsComponent {
   }
 
   valueSelectSpecialties(event: Event | any) {
-    this.formEditDoctor.reset();
     var valueSelectSpecialties = event.value;
     this.specialties = valueSelectSpecialties;
     const result = this.service.getDoctorBySpecialties(valueSelectSpecialties).subscribe(
@@ -104,6 +112,7 @@ export class EditConsultsComponent {
         next: (data => {
           this.doctorsNames = data;
           this.nameDoctor = this.doctorsNames[0].name;
+          this.specialties = data[0].specialties;
         })
       }
     )
@@ -115,6 +124,10 @@ export class EditConsultsComponent {
     const result = this.service.getDoctorByName(valueSelectDoctorName).subscribe(
       {
         next: (data: Doctor[]) => {
+          this.crm = data[0].crm;
+          this.idDoctor = data[0].id;
+          this.nameDoctor = data[0].name;
+          this.specialties = data[0].specialties;
           this.populateUpdateFormsDoctor(data);
         }
       }
@@ -123,42 +136,34 @@ export class EditConsultsComponent {
 
   }
 
-  valueSelectDoctorUpdateName(event: Event | any) {
-    var valueSelectDoctorName = event.value;
-    this.crm = valueSelectDoctorName['crm']
-    this.idDoctor = valueSelectDoctorName['id']
-    this.nameDoctor = valueSelectDoctorName['name']
-    this.specialties = valueSelectDoctorName['specialties']
-    this.populateUpdateFormsDoctor(valueSelectDoctorName);
-
-  }
-
-
   valueSelectRoom(event: Event | any | number) {
     var valueSelectRoom = event.value;
-    this.selectValueRoom = valueSelectRoom;
-    this.idRoom = valueSelectRoom['id'];
-    this.numberRoom = valueSelectRoom['numberRoom'];
-    this.isAvailable = valueSelectRoom['isAvailable']
+    this.idRoom = valueSelectRoom;
   }
 
-  getConsultsById(id: number){
+  getConsultsById(id: number) {
     this.service.getConsultsById(id).subscribe({
       next: (consult: Consultant) => {
-        this.doctorModel = consult.doctor;
-        this.populateFormsConsults(consult);
+        console.log(consult.patient.isPreferential)
+        this.idPatient = consult.patient.id;
+        this.nameDoctor = consult.doctor.name;
+        this.idDoctor = consult.doctor.id;
+        this.radioValue = consult.patient.isPreferential;
+        this.idRoom = consult.room.id;
+        this.idConsult = consult.id;
+        this.loadForm(consult);
       }
     })
   }
 
-  getAllDoctorByName(){
-    const result = this.service.getDoctorByName(this.selectValueNameDoctor).subscribe(
+  getAllDoctorByName() {
+    const result = this.service.getDoctorByName(this.nameDoctor).subscribe(
       {
         next: (data: Doctor[]) => {
           console.log(data);
           this.doctorsNames = data;
         }
-    })
+      })
   }
 
   getAllDoctors() {
@@ -179,11 +184,39 @@ export class EditConsultsComponent {
     });
   }
 
-  populateUpdateFormsDoctor(doctor: Doctor[] | any){
+  populateUpdateFormsDoctor(doctor: Doctor[] | any) {
     this.formEditDoctor.controls['crm'].setValue(doctor[0].crm);
   }
 
-  populateFormsConsults(consultsData: Consultant){
+  loadForm(consultsData: Consultant) {
+
+    this.formEditPatient = this._formBuilder.group(
+      {
+        name: [consultsData.patient.name],
+        lastName: [consultsData.patient.lastName],
+        age: [consultsData.patient.age],
+        cpf: [consultsData.patient.cpf],
+        isPreferential: [consultsData.patient.isPreferential]
+      }
+    )
+    this.formEditDoctor = this._formBuilder.group(
+      {
+        id: [this.idDoctor],
+        crm: [consultsData.doctor.crm],
+        name: [consultsData.doctor.name],
+        specialties: [consultsData.doctor.specialties]
+      }
+    )
+
+    this.formEditRoom = this._formBuilder.group(
+      {
+        numberRoom: [consultsData.room.numberRoom],
+        isAvailable: [consultsData.room.isAvailable]
+      }
+    )
+  }
+
+  populateFormsConsults(consultsData: Consultant) {
 
     //Forms Patient
     this.idPatient = consultsData.patient.id
@@ -201,41 +234,23 @@ export class EditConsultsComponent {
     this.formEditDoctor.controls['crm'].setValue(consultsData.doctor.crm);
   }
 
-  updateConsult(){
+  updateConsult() {
+
     const patientForms = this.formEditPatient.getRawValue() as Patient;
     const doctorForms = this.formEditDoctor.getRawValue() as Doctor;
     const roomForms = this.formEditRoom.getRawValue() as Room;
 
-
-
     const updateConsult = new Consultant();
     updateConsult.id = this.idConsult;
 
-    patientForms.isPreferential = this.selectValueIsPreferential;
+    patientForms.isPreferential = this.radioValue;
     patientForms.id = this.idPatient
     updateConsult.patient = patientForms;
 
-
-    this.doctorModel.id = doctorForms.id;
-    this.doctorModel.crm = doctorForms.crm;
-    this.doctorModel.name = doctorForms.name;
-    this.doctorModel.specialties = doctorForms.specialties;
-
-
+    doctorForms.id = this.idDoctor;
     updateConsult.doctor = doctorForms
-    console.log(doctorForms)
-
-
-
-    // doctorForms.id = this.doctorModel.id ;
-    // doctorForms.crm = this.doctorModel.crm;
-    // doctorForms.name = this.doctorModel.name
-    // doctorForms.specialties = this.doctorModel.specialties;
-    // updateConsult.doctor = doctorForms;
 
     roomForms.id = this.idRoom;
-    roomForms.numberRoom = this.numberRoom;
-    roomForms.isAvailable = this.isAvailable;
     updateConsult.room = roomForms;
 
     updateConsult.isPatientRoomClinic = false;
@@ -243,11 +258,27 @@ export class EditConsultsComponent {
     updateConsult.isPatientRoomMedication = false;
     updateConsult.isPatientRoomSorting = false;
 
-    //console.log(updateConsult);
 
+    this.alertService.openDialog("Confirma as alterações no paciente: " + patientForms.name + " ?")
+      .afterClosed().subscribe((res) => {
+        if (res == true) {
+          this.service.updateConsultant(this.idConsult, updateConsult).subscribe(
+            {
+              next: (data: Consultant) => {
+                this.openSnackBar("Consulta Atualizada com sucesso :)");
+                this.router.navigate([''])
+              }
+            }
+          )
+        }
+        this.alertService.close();
+      })
 
   }
 
+  openSnackBar(message: string) {
+    this.snackBar.open(message, '', { duration: 3000});
+  }
 
 
 }

@@ -7,6 +7,7 @@ import { Consultant } from 'src/app/model/Consultant';
 import { Patient } from 'src/app/model/Patient';
 import { Room } from 'src/app/model/Room';
 import { HospitalService } from 'src/app/services/hospital.service';
+import * as cpf from 'validation-br/dist/cpf'
 
 
 @Component({
@@ -70,6 +71,16 @@ export class CreateConsultsComponent {
     })
   }
 
+  validateCpf(event: Event | any){
+   var cpfDigited = event.target.value;
+   console.log(cpfDigited)
+
+    var cpfFormated = cpf.validate(cpfDigited);
+    console.log(cpfFormated)
+
+    cpfFormated ? this.openSnackBar("Cpf Válido") : this.openSnackBar("Cpf Inválido")
+  }
+
   createConsult() {
     const patientForms = this.formPatients.getRawValue() as Patient;
     const doctorForms = this.formDoctors.getRawValue() as Doctor;
@@ -79,7 +90,6 @@ export class CreateConsultsComponent {
 
     patientForms.isPreferential = this.selectValueIsPreferential;
     newConsult.patient = patientForms;
-
 
     doctorForms.id =  this.idDoctor;
     doctorForms.crm = this.crm;

@@ -26,7 +26,7 @@
                 <mat-label>Cpf</mat-label>
                 <input matInput placeholder="Digite seu cpf" maxlength="14" formControlName="cpf" required>
               </mat-form-field>
-              <mat-radio-group cke  aria-label="Select an option" formControlName="isPreferential"
+              <mat-radio-group  aria-label="Select an option"
                 (change)="radioChange($event)" name="rdbutton">
                 <span style="color:red">Paciente Preferêncial:</span>
                 <mat-radio-button [checked]="radioValue"  name="rdbPrefential" value="true">Sim</mat-radio-button>
@@ -45,7 +45,7 @@
             <div class="row" style="width:100%">
               <mat-form-field appearance="outline">
                 <mat-label>Selecione a especialidade</mat-label>
-                <mat-select  [value]="selectValueSpecialtiesDoctor"  (selectionChange)="valueSelectSpecialties($event)" name="specialties">
+                <mat-select formControlName="specialties"   (selectionChange)="valueSelectSpecialties($event)" name="specialties">
                   <mat-option *ngFor="let doctor of doctors" [value]="doctor.specialties">
                     {{doctor.specialties}}
                   </mat-option>
@@ -53,7 +53,7 @@
               </mat-form-field>
               <mat-form-field appearance="outline">
                 <mat-label>Selecione o Medico</mat-label>
-                <mat-select [value]="selectValueNameDoctor"  (selectionChange)="valueSelectDoctorName($event)">
+                <mat-select formControlName="name"  (selectionChange)="valueSelectDoctorName($event)" name="name">
                   <mat-option  *ngFor="let nameDoctor of doctorsNames" [value]="nameDoctor.name">
                     {{nameDoctor.name}}
                   </mat-option>
@@ -62,7 +62,7 @@
               <ng-template matStepLabel>Atualizar Médico</ng-template>
               <mat-form-field appearance="outline">
                 <mat-label>Crm</mat-label>
-                <input matInput placeholder="Crm do Médico" formControlName="crm" readonly="true">
+                <input id="crmInput" matInput placeholder="Crm do Médico" formControlName="crm" readonly="true">
               </mat-form-field>
               <div>
                 <button style="margin:10px" mat-raised-button matStepperPrevious color="accent">Back</button>
@@ -79,7 +79,7 @@
             <div class="row" style="width:100%">
               <mat-form-field appearance="outline">
                 <mat-label>Selecione a Sala</mat-label>
-                <mat-select [value]="selectValueRoom" (selectionChange)="valueSelectRoom($event)">
+                <mat-select formControlName="numberRoom" [value]="selectValueRoom" (selectionChange)="valueSelectRoom($event)">
                   <mat-option *ngFor="let room of rooms" [value]="room.numberRoom">
                     {{room.numberRoom}}
                   </mat-option>

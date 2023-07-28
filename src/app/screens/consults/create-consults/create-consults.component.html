@@ -24,7 +24,7 @@
               </mat-form-field>
               <mat-form-field appearance="outline">
                 <mat-label>Cpf</mat-label>
-                <input matInput placeholder="Digite seu cpf" maxlength="14" formControlName="cpf" required>
+                <input (blur)="validateCpf($event)" matInput placeholder="Digite seu cpf" maxlength="14"  formControlName="cpf" required>
               </mat-form-field>
               <mat-radio-group aria-label="Select an option" formControlName="isPreferential"
                 (change)="radioChange($event)" name="rdbutton">

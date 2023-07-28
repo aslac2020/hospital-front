@@ -1,5 +1,5 @@
 export class Room {
-  id?: number;
+  id!: number;
   numberRoom!: number;
   isAvailable!: boolean;
 }
