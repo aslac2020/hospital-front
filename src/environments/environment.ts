@@ -4,7 +4,11 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'http://localhost:8080/api'
+    apiUrl: 'http://localhost:8080/api',
+    tokenApi:'ZDE3YmM3Y2Y4MGUwNDhiYTg5MjI4NzBhODdiZGE4ODMtMTY5MDMxMDg3NA==',
+    apiAvatar: 'https://api.heygen.com/v1',
+    apiAvatarElai: 'https://apis.elai.io/api/v1',
+    tokenAvatarElai: 'kctmtBlGKPncCsQZo8aUFUt6fa3Gmq1F'
   };
 
   /*

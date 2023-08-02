@@ -83,13 +83,17 @@
               <textarea formControlName="observation" maxlength="300" cols="30" rows="10"></textarea>
               <div>
                 <button style="margin:10px" mat-raised-button matStepperPrevious color="accent">Back</button>
-                <button (click)="creteAvaliatePatient()" mat-raised-button matStepperNext
+                <button [disabled]="formSortingPatient.invalid" (click)="creteAvaliatePatient()" mat-raised-button matStepperNext
                   color="primary">Salvar</button>
               </div>
             </div>
           </form>
         </mat-step>
       </mat-horizontal-stepper>
+      <div class="video">
+        <video autoplay width="200" height="200" src={{videoUrl}}></video>
+      </div>
     </div>
   </div>
 </div>
+
