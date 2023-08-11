@@ -5,7 +5,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ThemePalette } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { first, take } from 'rxjs';
 import { AvatarElai, Canvas, Slide, Object, Animation, Avatar } from 'src/app/model/AvatarElai';
 import { Consultant } from 'src/app/model/Consultant';
 import { Patient } from 'src/app/model/Patient';
@@ -41,6 +40,7 @@ export class RoomAvaliateComponent {
   videoAvatar!: Avatar;
   videoId!: string;
   videoUrl!: string;
+  isOpenPanel!: boolean;
 
 
   levelGravities: Gravities = {
@@ -100,6 +100,7 @@ export class RoomAvaliateComponent {
 
   getAllPatientsFirst() {
     this.isMinusAge = false;
+    this.isOpenPanel = false;
 
     this.service.getOrderConsult().subscribe(
       {
@@ -110,7 +111,7 @@ export class RoomAvaliateComponent {
           }
           this.populateFormsPatient(data);
           this.consult = data;
-          //this.getCallPatient();
+          this.isVisiblePainel = true;
         }
       }
     )
@@ -285,7 +286,9 @@ export class RoomAvaliateComponent {
 
   openPanel() {
     this.isVisiblePainel = !this.isVisiblePainel;
-    this.getCallPatientOld()
+    if(!this.isVisiblePainel == true){
+      this.getCallPatientOld()
+    }
     //this.playVideo(this.videoId);
   }
 
@@ -344,7 +347,7 @@ export class RoomAvaliateComponent {
     )
   }
 
-  radioChange(event: Event | any) {
+  selectedValueService(event: Event | any) {
     console.log(event.value)
     this.nivelGravities = event.value;
     console.log(this.nivelGravities)

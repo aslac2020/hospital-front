@@ -73,27 +73,24 @@
                 <input type="number" matInput placeholder="Medição de Diabete" readonly
                   formControlName="meditionDiabetes">
               </mat-form-field>
-                <mat-radio-group  aria-label="Select an option"  (change)="radioChange($event)">
-                  <span style="color:red">Nivel de Atendimento:</span>
-                  <mat-radio-button value="NOT_URGENT">Não Urgencia</mat-radio-button>
-                  <mat-radio-button value="LITTLE_URGENT">Pouca Urgência</mat-radio-button>
-                  <mat-radio-button value="URGENT">Urgência</mat-radio-button>
-                  <mat-radio-button value="EMERGENCY">Emergência</mat-radio-button>
-                </mat-radio-group>
-              <textarea formControlName="observation" maxlength="300" cols="30" rows="10"></textarea>
+              <mat-chip-listbox aria-label="Fish selection" (change)="selectedValueService($event)">
+                <span style="color:black; font-weight:bold; margin-top:10px">Nivel de Atendimento:</span>
+                <mat-chip-option style="background-color:rgb(25, 53, 212);">Não Urgência</mat-chip-option>
+                <mat-chip-option style="background-color: green">Pouca Urgência</mat-chip-option>
+                <mat-chip-option style="background-color: yellow">Urgência</mat-chip-option>
+                <mat-chip-option style="background-color: red">Emergência</mat-chip-option>
+              </mat-chip-listbox>
+              <textarea class="form-control" formControlName="observation" maxlength="300" cols="15"
+                rows="6"></textarea>
               <div>
                 <button style="margin:10px" mat-raised-button matStepperPrevious color="accent">Back</button>
-                <button [disabled]="formSortingPatient.invalid" (click)="creteAvaliatePatient()" mat-raised-button matStepperNext
-                  color="primary">Salvar</button>
+                <button [disabled]="formSortingPatient.invalid" (click)="creteAvaliatePatient()" mat-raised-button
+                  matStepperNext color="primary">Salvar</button>
               </div>
             </div>
           </form>
         </mat-step>
       </mat-horizontal-stepper>
-      <div class="video">
-        <video autoplay width="200" height="200" src={{videoUrl}}></video>
-      </div>
     </div>
   </div>
 </div>
-

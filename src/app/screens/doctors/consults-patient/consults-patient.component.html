@@ -1,0 +1,81 @@
+<div class="container-fluid">
+  <div class="row flex-nowrap">
+    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0" style="background-color: #004a9f;">
+      <app-sidenav></app-sidenav>
+    </div>
+    <div class="col py-3">
+      <mat-card>
+        <mat-horizontal-stepper style="margin-top:10px" linear #stepper>
+          <mat-card-content>
+            <mat-step label="Paciente" errorMessage="Name is required.">
+              <div>
+                <img style="width: 80px; height:80px; margin-left: 15px; margin-top: 5px;"
+                  src="./assets/img/patients.png">
+                <span style="font-size:25px; font-weight:bold; margin-left: 15px;">Paciente</span>
+              </div>
+              <form [formGroup]="formViewPatient" style="margin-top: 10px">
+                <div class="row" style="width:100%">
+                  <div class="row">
+                    <div class="col">
+                      <mat-form-field style="width: 47%" appearance="outline">
+                        <mat-label>Nome</mat-label>
+                        <input matInput placeholder="Digite seu nome" formControlName="name" required>
+                      </mat-form-field>
+                      <mat-form-field style="width: 50%; margin-left: 10px;" appearance="outline">
+                        <mat-label>Sobrenome</mat-label>
+                        <input matInput placeholder="Digite seu sobrenome" formControlName="lastName" required>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Idade</mat-label>
+                    <input type="number" matInput placeholder="Digite sua idade" formControlName="age" maxlength="2">
+                  </mat-form-field>
+                </div>
+              </form>
+              <div>
+                <img style="width: 80px; height:80px; margin-left: 15px; margin-top: 5px;"
+                  src="./assets/img/avaliate.png">
+                <span style="font-size:25px; font-weight:bold; margin-left: 15px;">Avaliação do Paciente</span>
+                <form [formGroup]="formViewAvaliate" style="margin-top: 10px">
+                  <div class="row" style="width:100%">
+                    <div class="row">
+                      <div class="col">
+                        <mat-form-field style="width: 30%" appearance="outline">
+                          <mat-label>Pressão</mat-label>
+                          <input matInput placeholder="Pressão do paciente" formControlName="pressureBlood" required>
+                        </mat-form-field>
+                        <mat-form-field style="width: 30%; margin-left: 10px;" appearance="outline">
+                          <mat-label>Temperatura</mat-label>
+                          <input matInput placeholder="Temperatura do paciente" formControlName="temperature" required>
+                        </mat-form-field>
+                        <mat-form-field style="width: 30%; margin-left: 10px;" appearance="outline">
+                          <mat-label>Saturação</mat-label>
+                          <input matInput placeholder="Saturação do paciente" formControlName="saturation" required>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <mat-form-field style="width: 30%" appearance="outline">
+                          <mat-label>Diabete</mat-label>
+                          <input matInput placeholder="Medição de Diabetes do paciente" formControlName="meditionDiabetes" required>
+                        </mat-form-field>
+                        <mat-form-field style="width: 30%; margin-left: 10px;" appearance="outline">
+                          <mat-label>Classificação de Risco</mat-label>
+                          <input matInput placeholder="Classificação de Risco do paciente" formControlName="levelGravities" required>
+                        </mat-form-field>
+                        <textarea class="form-control" formControlName="observation" maxlength="300" cols="15"
+                        rows="6"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </mat-step>
+          </mat-card-content>
+        </mat-horizontal-stepper>
+      </mat-card>
+    </div>
+  </div>
+</div>

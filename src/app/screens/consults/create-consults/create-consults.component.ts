@@ -107,8 +107,6 @@ export class CreateConsultsComponent {
     newConsult.isPatientRoomMedication = false;
     newConsult.isPatientRoomSorting = false;
 
-    console.log(newConsult);
-
     const createConsult = this.service.createConsult(newConsult).subscribe(
       {
         next: (data: Consultant) => {

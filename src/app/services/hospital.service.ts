@@ -63,4 +63,8 @@ export class HospitalService {
     return this.http.post<Consultant>(`${environment.apiUrl}/translate`, consult);
   }
 
+  doctorCallPatient(): Observable<Consultant>{
+    return this.http.get<Consultant>(`${environment.apiUrl}/consultas/doutor/paciente`);
+  }
+
 }

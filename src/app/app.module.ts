@@ -33,8 +33,11 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatChipsModule} from '@angular/material/chips';
+
 
 import { CpfPipe } from './pipes/cpf.pipe';
+import { ConsultsPatientComponent } from './screens/doctors/consults-patient/consults-patient.component';
 
 
 @NgModule({
@@ -50,6 +53,7 @@ import { CpfPipe } from './pipes/cpf.pipe';
     ViewConsultsComponent,
     CpfPipe,
     RoomAvaliateComponent,
+    ConsultsPatientComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,7 +75,8 @@ import { CpfPipe } from './pipes/cpf.pipe';
     AppRoutingModule,
     MatSnackBarModule,
     MatDialogModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

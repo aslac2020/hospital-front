@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertDialogService } from 'src/app/services/alert-dialog.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -9,12 +10,18 @@ import { Router } from '@angular/router';
 export class SidenavComponent {
   showFiller = false;
 
-  constructor(private router: Router,){
-
+  constructor(
+    private router: Router,
+    private alertService: AlertDialogService
+    ){
   }
 
   navigateHome(){
     this.router.navigate([''])
+  }
+
+  openDialog(){
+   this.router.navigate(['/doutor/paciente']);
   }
 
 

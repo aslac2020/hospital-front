@@ -5,6 +5,7 @@ import { HomeComponent } from './screens/home/home.component';
 import { CreateConsultsComponent } from './screens/consults/create-consults/create-consults.component';
 import { ViewConsultsComponent } from './screens/consults/view-consults/view-consults.component';
 import { RoomAvaliateComponent } from './screens/roomavaliate/room-avaliate.component';
+import { ConsultsPatientComponent } from './screens/doctors/consults-patient/consults-patient.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'pacientes/avaliacao',
     component: RoomAvaliateComponent
+  },
+  {
+    path: 'doutor/paciente',
+    component: ConsultsPatientComponent
   }
 
 ];
