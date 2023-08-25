@@ -100,7 +100,7 @@ export class RoomAvaliateComponent {
 
   getAllPatientsFirst() {
     this.isMinusAge = false;
-    this.isOpenPanel = false;
+    this.isVisiblePainel = false;
 
     this.service.getOrderConsult().subscribe(
       {
@@ -110,6 +110,10 @@ export class RoomAvaliateComponent {
             this.isValuePressedBlood = 0
           }
           this.populateFormsPatient(data);
+          data.isPatientToken = true;
+          data.isPatientRoomClinic = false;
+          data.isPatientRoomMedication = false;
+          data.isPatientWaitingClinic = false;
           this.consult = data;
           this.isVisiblePainel = true;
         }
@@ -175,11 +179,11 @@ export class RoomAvaliateComponent {
   }
 
   playVideo(id: string) {
-   this.avatarService.getRetrieveVideo(id).subscribe(
+    this.avatarService.getRetrieveVideo(id).subscribe(
       {
         next: (data: AvatarElai) => {
           if (data.status == "ready") {
-              this.videoUrl = data.url
+            this.videoUrl = data.url
           }
         }
       }
@@ -270,7 +274,7 @@ export class RoomAvaliateComponent {
     slidesConfig.avatar = avatarConfig;
     slidesConfig.animation = "fade_in";
     slidesConfig.language = "Portuguese";
-    slidesConfig.speech = `Paciente ${this.consult.patient.name} ${this.consult.patient.lastName} comparecer a Sala de Triagem`;
+    //slidesConfig.speech = `Paciente ${this.consult.patient.name} ${this.consult.patient.lastName} comparecer a Sala de Triagem`;
     slidesConfig.voice = "pt-BR-BrendaNeural";
     slidesConfig.voiceType = "text";
     slidesConfig.voiceProvider = "azure";
@@ -286,7 +290,7 @@ export class RoomAvaliateComponent {
 
   openPanel() {
     this.isVisiblePainel = !this.isVisiblePainel;
-    if(!this.isVisiblePainel == true){
+    if (!this.isVisiblePainel == true) {
       this.getCallPatientOld()
     }
     //this.playVideo(this.videoId);
@@ -348,9 +352,25 @@ export class RoomAvaliateComponent {
   }
 
   selectedValueService(event: Event | any) {
-    console.log(event.value)
-    this.nivelGravities = event.value;
-    console.log(this.nivelGravities)
+    this.selectedValueBack(event.value);
+
+  }
+
+  selectedValueBack(gravities: string) {
+    switch (gravities) {
+      case "Não Urgência":
+        this.nivelGravities = 'NOT_URGENT'
+        break;
+      case "Pouca Urgência":
+        this.nivelGravities = 'LITTLE_URGENT'
+        break;
+      case "Urgência":
+        this.nivelGravities = 'URGENT'
+        break;
+        case "Emergência":
+        this.nivelGravities = 'EMERGENCY'
+        break;
+    }
   }
 
 

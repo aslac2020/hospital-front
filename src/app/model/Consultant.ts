@@ -4,6 +4,7 @@ import { ConsultStatus } from './ConsultStatus';
 import { Doctor } from './Doctor';
 import { Patient } from './Patient';
 import { Room } from './Room';
+import { PatientHistory } from './PatientHistory';
 export class Consultant {
   id!: number;
   dateConsult!: LocalDate ;
@@ -17,6 +18,7 @@ export class Consultant {
   room!: Room;
   patient!: Patient;
   roomAvaliate!: RoomAvaliate;
+  patientHistory!: PatientHistory;
   status!: ConsultStatus;
 
 }

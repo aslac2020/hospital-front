@@ -7,6 +7,6 @@ export class RoomAvaliate {
   saturation!: number;
   meditionDiabetes?: number;
   observation!: string
-  levelGravities?: string;
+  levelGravities!: string;
 
 }

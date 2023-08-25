@@ -5,7 +5,7 @@
     </div>
     <div class="col py-3">
       <button mat-raised-button (click)="openPanel()">Chamar Paciente</button>
-      <mat-horizontal-stepper style="margin-top:10px" linear #stepper>
+      <mat-horizontal-stepper style="margin-top:10px" linear #stepper *ngIf="!isVisiblePainel" >
         <!-- Forms Patients-->
         <mat-step label="Step 1" errorMessage="Name is required.">
           <form [formGroup]="formAvaliatePatient">

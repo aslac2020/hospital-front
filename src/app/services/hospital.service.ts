@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Doctor } from '../model/Doctor';
 import { Room } from '../model/Room';
 import { environment } from 'src/environments/environment';
+import { PatientHistory } from '../model/PatientHistory';
 
 
 @Injectable({
@@ -64,7 +65,12 @@ export class HospitalService {
   }
 
   doctorCallPatient(): Observable<Consultant>{
-    return this.http.get<Consultant>(`${environment.apiUrl}/consultas/doutor/paciente`);
+    return this.http.get<Consultant>(`${environment.apiUrl}/consultas/consultorio/paciente`);
+  }
+
+  createPatientHistory(patientHistory: PatientHistory): Observable<PatientHistory>{
+    return this.http.post<PatientHistory>(`${environment.apiUrl}/paciente/historico`, patientHistory);
+
   }
 
 }
