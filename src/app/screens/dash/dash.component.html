@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <div class="row flex-nowrap">
+    <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0" style="background-color: #004a9f;">
+      <app-sidenav></app-sidenav>
+    </div>
+    <div class="col py-3">
+      <!--dash.component.html-->
+      <div class="grid-container">
+        <h1 class="mat-h1">Dashboard</h1>
+        <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="200px">
+          <!--Mini Cards-->
+          <mat-grid-tile *ngFor="let i of [1, 2, 3, 4]" [colspan]="( cardLayout | async )?.miniCard?.cols"
+            [rowspan]="( cardLayout | async )?.miniCard?.rows">
+            <app-card title="Card {{i}}">
+              <div>Mini Card Content Here</div>
+            </app-card>
+          </mat-grid-tile>
+          <!--Charts-->
+          <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
+            <app-card title="Especialidades">
+              <div class="chartContainer">
+                <app-patients-specialties></app-patients-specialties>
+              </div>
+            </app-card>
+         </mat-grid-tile>
+         <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
+          <app-card title="Especialidades">
+              <app-patients-specialties></app-patients-specialties>
+          </app-card>
+       </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </div>
+  </div>
+</div>

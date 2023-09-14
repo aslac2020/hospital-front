@@ -6,11 +6,16 @@ import { CreateConsultsComponent } from './screens/consults/create-consults/crea
 import { ViewConsultsComponent } from './screens/consults/view-consults/view-consults.component';
 import { RoomAvaliateComponent } from './screens/roomavaliate/room-avaliate.component';
 import { ConsultsPatientComponent } from './screens/doctors/consults-patient/consults-patient.component';
+import { DashComponent } from './screens/dash/dash.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+  },
+  {
+    path: 'dashboard',
+    component: DashComponent,
   },
   {
     path: 'consulta',

@@ -8,13 +8,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './screens/home/home.component';
 import { PatientsComponent } from './screens/patients/patients.component';
-import { SidenavComponent } from './screens/sidenav/sidenav.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { CreateConsultsComponent } from './screens/consults/create-consults/create-consults.component';
 import { EditConsultsComponent } from './screens/consults/edit-consults/edit-consults.component';
-import { DialogComponent } from './dialog/dialog.component';
+import { DialogComponent } from './components/dialog/dialog.component';
 import { ViewConsultsComponent } from './screens/consults/view-consults/view-consults.component';
 import { RoomAvaliateComponent } from './screens/roomavaliate/room-avaliate.component';
 
@@ -38,6 +38,13 @@ import {MatChipsModule} from '@angular/material/chips';
 
 import { CpfPipe } from './pipes/cpf.pipe';
 import { ConsultsPatientComponent } from './screens/doctors/consults-patient/consults-patient.component';
+import { DashComponent } from './screens/dash/dash.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatMenuModule } from '@angular/material/menu';
+import { LayoutModule } from '@angular/cdk/layout';
+import { CardComponent } from './components/card/card.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { PatientsSpecialtiesComponent } from './charts/patients-specialties/patients-specialties.component';
 
 
 @NgModule({
@@ -54,6 +61,9 @@ import { ConsultsPatientComponent } from './screens/doctors/consults-patient/con
     CpfPipe,
     RoomAvaliateComponent,
     ConsultsPatientComponent,
+    DashComponent,
+    CardComponent,
+    PatientsSpecialtiesComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,7 +86,11 @@ import { ConsultsPatientComponent } from './screens/doctors/consults-patient/con
     MatSnackBarModule,
     MatDialogModule,
     MatCheckboxModule,
-    MatChipsModule
+    MatChipsModule,
+    MatGridListModule,
+    MatMenuModule,
+    LayoutModule,
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
