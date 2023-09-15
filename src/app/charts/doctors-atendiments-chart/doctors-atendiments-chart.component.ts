@@ -1,16 +1,14 @@
-import { single } from 'rxjs/internal/operators/single';
 import { Component } from '@angular/core';
 import { Color, LegendPosition, ScaleType } from '@swimlane/ngx-charts';
-import { ChartServicesService } from 'src/app/services/chart-services.service';
 import { Doctor } from 'src/app/model/Doctor';
+import { ChartServicesService } from 'src/app/services/chart-services.service';
 
 @Component({
-  selector: 'app-patients-specialties',
-  templateUrl: './patients-specialties.component.html',
-  styleUrls: ['./patients-specialties.component.css']
+  selector: 'app-doctors-atendiments-chart',
+  templateUrl: './doctors-atendiments-chart.component.html',
+  styleUrls: ['./doctors-atendiments-chart.component.css']
 })
-export class PatientsSpecialtiesComponent {
-
+export class DoctorsAtendimentsChartComponent {
   view: [number, number] = [400, 400];
   // options
   gradient: boolean = true;

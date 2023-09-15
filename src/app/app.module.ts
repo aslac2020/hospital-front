@@ -45,6 +45,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { CardComponent } from './components/card/card.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { PatientsSpecialtiesComponent } from './charts/patients-specialties/patients-specialties.component';
+import { DoctorsAtendimentsChartComponent } from './charts/doctors-atendiments-chart/doctors-atendiments-chart.component';
 
 
 @NgModule({
@@ -64,6 +65,7 @@ import { PatientsSpecialtiesComponent } from './charts/patients-specialties/pati
     DashComponent,
     CardComponent,
     PatientsSpecialtiesComponent,
+    DoctorsAtendimentsChartComponent,
   ],
   imports: [
     BrowserModule,
