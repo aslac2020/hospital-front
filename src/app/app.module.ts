@@ -44,8 +44,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { LayoutModule } from '@angular/cdk/layout';
 import { CardComponent } from './components/card/card.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { PatientsSpecialtiesComponent } from './charts/patients-specialties/patients-specialties.component';
 import { DoctorsAtendimentsChartComponent } from './charts/doctors-atendiments-chart/doctors-atendiments-chart.component';
+import { ConsultsPatientsChartComponent } from './charts/consults-patients-chart/consults-patients-chart.component';
 
 
 @NgModule({
@@ -64,8 +64,8 @@ import { DoctorsAtendimentsChartComponent } from './charts/doctors-atendiments-c
     ConsultsPatientComponent,
     DashComponent,
     CardComponent,
-    PatientsSpecialtiesComponent,
     DoctorsAtendimentsChartComponent,
+    ConsultsPatientsChartComponent,
   ],
   imports: [
     BrowserModule,

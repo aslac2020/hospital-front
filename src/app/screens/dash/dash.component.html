@@ -24,8 +24,8 @@
             </app-card>
          </mat-grid-tile>
          <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
-          <app-card title="Especialidades">
-              <app-patients-specialties></app-patients-specialties>
+          <app-card title="Consultas">
+            <app-doctors-atendiments-chart></app-doctors-atendiments-chart>
           </app-card>
        </mat-grid-tile>
         </mat-grid-list>
